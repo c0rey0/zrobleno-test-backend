@@ -1,0 +1,30 @@
+version: "2"
+services:
+  adminer:
+    image: adminer:latest
+    container_name: test.adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    ports:
+      - 3308:8080
+    links:
+      - postgres
+  postgres:
+    image: postgres:12.3
+    restart: always
+    container_name: test.postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: X3GuqTAL
+  nginx:
+    image: nginx:mainline-alpine
+    container_name: test.nginx
+    env_file:
+      - .env
+    extra_hosts:
+        - "localbox:${MACHINE_IP}"
+    ports:
+      - 83:80
