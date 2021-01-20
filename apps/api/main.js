@@ -6,7 +6,7 @@ const mount = require('koa-mount');
 const path = require('path');
 const cors = require('@koa/cors');
 
-require('../../shared/db');
+// require('../../shared/db');
 
 const app = new Koa();
 app.use(cors());
